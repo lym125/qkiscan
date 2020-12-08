@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -13,7 +14,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        BusinessException::class,
     ];
 
     /**
@@ -48,6 +49,20 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof BusinessException) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'code' => $exception->getCode() ?: 10000,
+                    'data' => '',
+                    'message' => $exception->getMessage(),
+                ], $exception->status);
+            }
+
+            if (! config('app.debug')) {
+                $exception = new HttpException($exception->status, $exception->getMessage());
+            }
+        }
+
         return parent::render($request, $exception);
     }
 }
