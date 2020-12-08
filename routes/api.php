@@ -28,4 +28,11 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('get-contract-address-top', 'AddressController@getTokenTop');//获取合约资产Top100
     Route::get('search', 'IndexController@search');//搜索接口
     Route::get('abi', 'IndexController@abi');//abi
+
+    /**
+     * GET /addresses/{address}/devices 获取钱包地址绑定的所有设备
+     * POST /addresses/{address}/devices 为钱包地址绑定设备
+     */
+    Route::get('addresses/{address}/devices', 'DeviceController@index');
+    Route::post('addresses/{address}/devices', 'DeviceController@store');
 });

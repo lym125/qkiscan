@@ -35,15 +35,26 @@ class Address extends Model
     const TYPE_CONTRACT_ADDRESS = 2;
 
 
-    public function to(){
+    public function to()
+    {
         return $this->hasMany(TokenTx::class, 'to_address_id');
     }
 
-    public function from(){
+    public function from()
+    {
         return $this->hasMany(TokenTx::class, 'from_address_id');
     }
 
-    public function balances(){
+    public function balances()
+    {
         return $this->hasMany(Balances::class, 'address_id');
+    }
+
+    /**
+     * 属于此地址的绑定设备
+     */
+    public function devices()
+    {
+        return $this->hasMany(Device::class);
     }
 }
