@@ -32,7 +32,9 @@ Route::group(['namespace' => 'Api'], function () {
     /**
      * GET /addresses/{address}/devices 获取钱包地址绑定的所有设备
      * POST /addresses/{address}/devices 为钱包地址绑定设备
+     * DELETE /addresses/{address}/devices 删除钱包地址绑定的设备
      */
     Route::get('addresses/{address}/devices', 'DeviceController@index');
     Route::post('addresses/{address}/devices', 'DeviceController@store');
+    Route::delete('addresses/{address}/devices', 'DeviceController@destroy');
 });

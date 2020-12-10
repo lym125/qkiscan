@@ -79,4 +79,34 @@ class DeviceController extends Controller
             'message' => 'OK',
         ]);
     }
+
+    /**
+     * 删除 “钱包地址” 绑定的设备
+     *
+     * @param string $address
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($address, Request $request)
+    {
+        $this->validate($request, [
+            'fingerprint' => ['bail', 'required', 'string', 'max:150'],
+        ], [], [
+            'fingerprint' => '设备指纹',
+        ]);
+
+        $walletAddress = Address::where('address', $address)->first();
+
+        if (null === $walletAddress) {
+            throw new BusinessException('钱包地址未找到');
+        }
+
+        $walletAddress->devices()->where('fingerprint', $request->fingerprint)->delete();
+
+        return response()->json([
+            'code' => 0,
+            'data' => '',
+            'message' => 'OK',
+        ]);
+    }
 }
