@@ -59,11 +59,11 @@ class DeviceController extends Controller
             'fingerprint' => '设备指纹',
         ]);
 
-        $walletAddress = Address::where('address', $address)->first();
-
-        if (null === $walletAddress) {
-            throw new BusinessException('钱包地址未找到');
+        if (! is_address($address)) {
+            throw new BusinessException('钱包地址格式不正确');
         }
+
+        $walletAddress = Address::firstOrCreate(['address' => $address]);
 
         $device = Device::firstOrCreate([
             'address_id' => $walletAddress->id,

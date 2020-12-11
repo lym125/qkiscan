@@ -70,7 +70,7 @@ function HexDec2(string $hex)
     if (strpos($hex, '0x') === 0) {
         $hex = substr($hex, 2);
     }
-    
+
     $dec = 0;
     $len = strlen($hex);
     for ($i = 1; $i <= $len; $i++) {
@@ -110,5 +110,23 @@ function replaceStr(string $str)
         return str_replace("les", "轻", $str);
     } else {
         return $str;
+    }
+}
+
+if (! function_exists('is_address')) {
+    /**
+     * 是否是正确的hex地址.
+     *
+     * @param string $str
+     *
+     * @return bool
+     */
+    function is_address(string $str): bool
+    {
+        if (is_string($str) && preg_match('/^0x[0-9a-f]{40}$/i', $str)) {
+            return true;
+        }
+
+        return false;
     }
 }
