@@ -91,7 +91,7 @@ class TxController extends Controller
             if (substr($data['input']??"", 0, 10) === '0xa9059cbb') {
                 //实例化通证
                 $url_arr = parse_url(env("RPC_HOST"));
-                $geth = new EthereumRPC($url_arr['host'], $url_arr['port']);
+                $geth = new EthereumRPC($url_arr['host'], $url_arr['port'] ?? null);
                 $erc20 = new ERC20($geth);
                 $token = $erc20->token($data['to']);
                 $decimals = $token->decimals();

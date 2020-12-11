@@ -32,7 +32,7 @@ class BalanceController extends Controller
 
         //连接rpc
         $url_arr = parse_url(env("RPC_HOST"));
-        $geth = new EthereumRPC($url_arr['host'], $url_arr['port']);
+        $geth = new EthereumRPC($url_arr['host'], $url_arr['port'] ?? null);
         $erc20 = new ERC20($geth);
 
         try {
@@ -124,7 +124,7 @@ class BalanceController extends Controller
                 $assets_arr = explode(',',$item['assets_token']);
                 //连接rpc
                 $url_arr = parse_url(env("RPC_HOST"));
-                $geth = new EthereumRPC($url_arr['host'], $url_arr['port']);
+                $geth = new EthereumRPC($url_arr['host'], $url_arr['port'] ?? null);
                 $erc20 = new ERC20($geth);
                 $i = 1;
                 foreach ($assets_arr as $t)
