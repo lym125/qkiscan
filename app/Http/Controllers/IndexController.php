@@ -112,7 +112,7 @@ class IndexController extends Controller
                 //地址查询
                 $url = "/address/" . $keyword;
                 return redirect($url);
-            } else if ($hash_leng == 66) {
+            } elseif ($hash_leng == 66) {
                 //hash查询
                 $result = $rpcService->getBlockByHash($keyword);
                 $blockInfo = $result['result'];
@@ -178,5 +178,4 @@ class IndexController extends Controller
 
         return view('index.bp', $data);
     }
-
 }

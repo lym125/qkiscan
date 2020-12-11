@@ -44,7 +44,6 @@ function getMultiple($unit)
  */
 function float_format($num)
 {
-
     $temp = explode('.', $num);
 
     if (sizeof($temp) > 1) {
@@ -66,6 +65,12 @@ function float_format($num)
  */
 function HexDec2(string $hex)
 {
+    // 解决 PHP 7.4 无效的字符串将生成弃用通知，引起程序崩溃
+    // https://www.php.net/manual/en/migration74.deprecated.php#migration74.deprecated.core.invalid-base-characters
+    if (strpos($hex, '0x') === 0) {
+        $hex = substr($hex, 2);
+    }
+    
     $dec = 0;
     $len = strlen($hex);
     for ($i = 1; $i <= $len; $i++) {
@@ -85,7 +90,7 @@ function formatTime(string $time, $type = 1)
     $t = "";
     if ($type == 1) {
         $t = date("Y-m-d H:i:s", base_convert($time, 16, 10) + 28800);
-    } else if ($type == 2) {
+    } elseif ($type == 2) {
         $t = date("Y-m-d H:i:s", strtotime($time) + 28800);
     }
     return $t;
@@ -107,5 +112,3 @@ function replaceStr(string $str)
         return $str;
     }
 }
-
-
