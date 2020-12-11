@@ -24,13 +24,18 @@ class Settings extends Model
     public $table = 'settings';
 
     /**
+     * {@inheritdoc}
+     */
+    protected $guarded = ['id'];
+
+    /**
      * 根据名称获取值
      * @param $key
      * @return null
      */
     public static function getValueByKey($key)
     {
-        $data = self::where('key',$key)->first();
+        $data = self::where('key', $key)->first();
         return $data->value ?? null;
     }
 }

@@ -1,0 +1,33 @@
+{
+    "name": "qkiscan/xmpush",
+    "description": "小米推送",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "李静",
+            "email": "lym125@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Qkiscan\\Xmpush\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Qkiscan\\Xmpush\\XmpushServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "version": "1.0.0"
+}

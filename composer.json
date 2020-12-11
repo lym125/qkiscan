@@ -13,6 +13,7 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "predis/predis": "^1.1",
+        "qkiscan/xmpush": "^1.0",
         "sentry/sentry-laravel": "^1.2"
     },
     "require-dev": {
@@ -67,6 +68,10 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": {
+        "qkiscan-xmpush": {
+            "type": "path",
+            "url": "packages/xmpush"
+        },
         "packagist": {
             "type": "composer",
             "url": "https://mirrors.aliyun.com/composer/"
