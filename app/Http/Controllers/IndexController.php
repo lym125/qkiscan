@@ -65,7 +65,7 @@ class IndexController extends Controller
         //先查询出前一天的最大的id值 并缓存到今日结束
         $minutes = $end->diffInMinutes(Carbon::tomorrow());
         $maxId = Cache::remember("home_token_max_id", $minutes, function () {
-            return Transactions::where('created_at', '<', Carbon::today())->orderBy('id')->max('id');
+            return Transactions::where('created_at', '<', Carbon::today())->orderBy('id')->max('id') ?: 0;
         });
 
         //缓存1分钟
