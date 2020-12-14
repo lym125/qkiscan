@@ -67,14 +67,14 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": {
-        "qkiscan-xmpush": {
-            "type": "path",
-            "url": "packages/xmpush"
-        },
-        "packagist": {
+    "repositories": [
+        {
             "type": "composer",
             "url": "https://mirrors.aliyun.com/composer/"
+        },
+        {
+            "type": "path",
+            "url": "packages/xmpush"
         }
-    }
+    ]
 }
